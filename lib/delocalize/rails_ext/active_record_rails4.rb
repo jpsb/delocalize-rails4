@@ -17,9 +17,9 @@ ActiveRecord::ConnectionAdapters::Column.class_eval do
     if number? && I18n.delocalization_enabled?
       value = Numeric.parse_localized(value)
       if type == :integer
-        value = value.to_i
+        value = value ? value.to_i : nil
       else
-        value = value.to_f
+        value = value ? value.to_f : nil
       end
     end
     type_cast_for_write_without_localization(value)
